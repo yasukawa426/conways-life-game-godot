@@ -1,20 +1,18 @@
 [gd_scene format=3 uid="uid://boe6alnlhocue"]
 
+[ext_resource type="PackedScene" uid="uid://87sqn3gmqdkx" path="res://scenes/grid.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://cn531hnr6fobs" path="res://scenes/camera_2d.gd" id="2_0wfyh"]
-[ext_resource type="Script" uid="uid://b434wqqp2adaj" path="res://scenes/grid.gd" id="2_sugp2"]
 
 [node name="Main" type="Node2D" unique_id=759630922]
 
-[node name="Grid" type="Control" parent="." unique_id=166193048]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-script = ExtResource("2_sugp2")
+[node name="ColorRect" type="ColorRect" parent="." unique_id=2056994404]
+offset_left = -3065.0
+offset_top = -1610.0
+offset_right = 4935.0
+offset_bottom = 2390.0
+color = Color(0.02721747, 0.18793595, 0.23219019, 1)
+
+[node name="Grid" parent="." unique_id=212534723 instance=ExtResource("1_0wfyh")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=918038106]
 position = Vector2(960, 540)
