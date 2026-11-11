@@ -44,8 +44,10 @@ func _notification(what: int) -> void:
 
 
 func _update_grid() -> void:
-	var grid_dimensions := size * _GRID_SCALE
-	_cell_size = grid_dimensions / Vector2(_GRID_SIZE)
+	var avaible_space := size * _GRID_SCALE # the maximum amount of space the grid can occupy
+	var cell_size: float = min(avaible_space.x / _GRID_SIZE.x, avaible_space.y / _GRID_SIZE.y) # calculate how large it can be in each axis and still fit all cells into the grid and then pick the lowest
+
+	_cell_size = Vector2.ONE * cell_size # use its result as the cell size
 
 	queue_redraw()
 
