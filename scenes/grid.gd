@@ -10,6 +10,7 @@ const _BASE_GRID_SIZE: Vector2i = Vector2i(100, 50)
 const _GRID_SCALE: float = 0.9
 const _BORDER_WIDTH: float = -1
 
+@onready var simulation_timer: Timer = $SimulationTimer
 ## The size of a individual tile
 var _cell_size: Vector2
 ## Matrix containing the alive value of each cell with size `(_BASE_GRID_SIZE.y, _BASE_GRID_SIZE.x)`
@@ -28,7 +29,9 @@ var _next_grid: Array[Array] = []
 
 var _cell_count = _scaled_size.x * _scaled_size.y
 
-var _size_multiplier: float = 0.2:
+
+#TODO: make timer oneshot and then call it again after the simulation() has finished running, buttons and stuff. hold left mouse button. draw border once in a separete node ultil needed again.
+@export var _size_multiplier: float = 0.2:
 	get:
 		return _size_multiplier
 	set(value):
@@ -41,6 +44,7 @@ var _scaled_size: Vector2i = _size_multiplier * _BASE_GRID_SIZE
 
 func _ready() -> void:
 	print("number of cells: ", _cell_count)
+	simulation_timer.paused = true
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	size = get_viewport_rect().size
 	_update_grid()
@@ -52,8 +56,6 @@ func _ready() -> void:
 		_grid[y].fill(false) # cells start dead
 	
 	_next_grid = _grid.duplicate_deep()
-	
-	
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
@@ -112,7 +114,7 @@ func _gui_input(event: InputEvent) -> void:
 # Any dead cell with exactly three live neighbors becomes alive in the next generation.
 # what is a neigbouhr?: given (x,y) everyone from (x-1, y-1) to (x+1, y+1) minus (x,y) - see neighbours.png
 func _simulate() -> void:
-	print(_grid)
+	#print(_grid)
 	var x = 0
 	var y = 0
 	for row in _grid:
@@ -139,18 +141,19 @@ func _simulate() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("toggle_simulation"):
-		_simulate()
+		simulation_timer.paused = !simulation_timer.paused
+		simulation_timer.start()
 
 # what is a neigbouhr?: given (x,y) everyone from (x-1, y-1) to (x+1, y+1) minus (x,y) - see neighbours.png
 func _get_alive_neighbors_count(x: int, y: int) -> int:
 	# var neighbors: Array[bool]
 	var alive_count: int = 0
 
-	for i in range(x-1, x+2): # if it is out of bounds
+	for i in range(x - 1, x + 2): # if it is out of bounds
 		if i < 0 or i > (_grid.size() - 1):
 			continue
 
-		for j in range(y-1, y+2):
+		for j in range(y - 1, y + 2):
 			if x == i and j == y: # if it is the cell we are at instead of a neighbour
 				continue
 			if j > (_grid[x].size() - 1) or j < 0: # if it is out of bounds
@@ -179,3 +182,8 @@ func _apply_rules(is_alive: bool, alive_neighbors_count: int) -> bool:
 	
 	else:
 		return alive_neighbors_count == 3
+
+
+func _on_simulation_timer_timeout() -> void:
+	_simulate()
+	queue_redraw()
