@@ -1,0 +1,37 @@
+[gd_scene format=3 uid="uid://boe6alnlhocue"]
+
+[ext_resource type="Script" uid="uid://cms73t3dd1f35" path="res://scenes/main.gd" id="1_o5qli"]
+[ext_resource type="Script" uid="uid://cn531hnr6fobs" path="res://scenes/camera_2d.gd" id="2_0wfyh"]
+
+[node name="Main" type="Node2D" unique_id=759630922]
+script = ExtResource("1_o5qli")
+
+[node name="Control" type="Control" parent="." unique_id=117147221]
+custom_minimum_size = Vector2(1920, 1080)
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 1920.0
+offset_bottom = 1080.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="Grid" type="GridContainer" parent="Control" unique_id=1763636181]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 50
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1354592496]
+position = Vector2(955, 543)
+enabled = false
+script = ExtResource("2_0wfyh")
