@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://87sqn3gmqdkx"]
+
+[ext_resource type="Script" uid="uid://b434wqqp2adaj" path="res://scenes/grid.gd" id="1_t5fjg"]
+
+[node name="Grid" type="Control" unique_id=212534723]
+z_index = 10
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_t5fjg")
+_size_multiplier = 2.0
+
+[node name="Borders" type="Control" parent="." unique_id=1848244730]
+visible = false
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SimulationTimer" type="Timer" parent="." unique_id=685790305]
+wait_time = 0.1
+
+[connection signal="timeout" from="SimulationTimer" to="." method="_on_simulation_timer_timeout"]
