@@ -1,8 +1,11 @@
 extends Control
 
+const _BACKGROUND_COLOR: Color = Color("#20252B")
+const _ALIVE_CELL_COLOR: Color =  Color.YELLOW
+const _CELL_BORDER_COLOR: Color = Color("#343B44")
 
 # The amount of cell inside the grid
-const _GRID_SIZE: Vector2i = Vector2i(500, 500)
+const _GRID_SIZE: Vector2i = Vector2i(100, 100)
 # How much of the screen the grid occups 
 const _GRID_SCALE: float = 0.9
 const _BORDER_WIDTH: float = -1
@@ -19,9 +22,12 @@ var _cell_size: Vector2
 ##	[true, false]
 ##]
 ##[/code]
+
 var _grid: Array[Array] = []
+var _cell_count = _GRID_SIZE.x * _GRID_SIZE.y
 
 func _ready() -> void:
+	print("number of cells: ", _cell_count)
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	size = get_viewport_rect().size
 	_update_grid()
@@ -50,7 +56,7 @@ func _draw() -> void:
 	var offset := (size - dimensions) / 2 # the empty space before the grid so it can be centered
 
 	# draw background
-	draw_rect(Rect2(offset, dimensions), Color.BLACK) 
+	draw_rect(Rect2(offset, dimensions), _BACKGROUND_COLOR)
 	
 	# for each cell, paint white if alive
 	for y in range(_GRID_SIZE.y):
@@ -58,15 +64,15 @@ func _draw() -> void:
 			# if alive
 			if _grid[y][x]:
 				var rect_position := offset + Vector2(x, y) * _cell_size
-				draw_rect(Rect2(rect_position, _cell_size), Color.WHITE) # paint it white
+				draw_rect(Rect2(rect_position, _cell_size), _ALIVE_CELL_COLOR) # paint it
 
 	# draw horizontal borders
 	for y in range(_GRID_SIZE.y + 1):
-		draw_line(Vector2(offset.x, (_cell_size.y * y) + offset.y), Vector2(size.x - offset.x, (_cell_size.y * y) + offset.y), Color.GRAY, _BORDER_WIDTH)
+		draw_line(Vector2(offset.x, (_cell_size.y * y) + offset.y), Vector2(size.x - offset.x, (_cell_size.y * y) + offset.y), _CELL_BORDER_COLOR, _BORDER_WIDTH)
 
 	# draw vertical borders	
 	for x in range(_GRID_SIZE.x + 1):
-		draw_line(Vector2((_cell_size.x * x) + offset.x, offset.y), Vector2((_cell_size.x * x) + offset.x, size.y - offset.y), Color.GRAY, _BORDER_WIDTH)
+		draw_line(Vector2((_cell_size.x * x) + offset.x, offset.y), Vector2((_cell_size.x * x) + offset.x, size.y - offset.y), _CELL_BORDER_COLOR, _BORDER_WIDTH)
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
