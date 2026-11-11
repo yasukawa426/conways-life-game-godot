@@ -1,7 +1,7 @@
 [20 Games Catalogue.](https://github.com/yasukawa426/20-games-challenge-catalog)
 
 
-## Game X of 20 - Title Here
+## Game 5 of 20 - Conway's Game of Life
 
 Game's explanation + purpose of developing it
 
