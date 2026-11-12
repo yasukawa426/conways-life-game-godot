@@ -184,7 +184,7 @@ func _apply_rules(is_alive: bool, alive_neighbors_count: int) -> bool:
 		return alive_neighbors_count == 3
 	
 func toggle_simulation(running: bool):
-	_simulation_running = !running
+	_simulation_running = running
 	$SimulationTimer.paused = !running
 	$SimulationTimer.start()
 	

@@ -70,6 +70,7 @@ size_flags_horizontal = 3
 step = 10.0
 
 [node name="SpeedTimer" type="Timer" parent="UI/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" unique_id=1315302910]
+one_shot = true
 
 [node name="ControlsFoldableContainer" type="FoldableContainer" parent="UI/FoldableContainer/GridContainer" unique_id=103862757]
 layout_mode = 2
