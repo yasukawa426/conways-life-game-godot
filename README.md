@@ -12,7 +12,13 @@ Game's explanation + purpose of developing it
 You can move and shoot and stuff and die.
 
 ### Controls
-- WASD - Move lmao
+- Set Cell Alive: Hold LMB
+- Set Cell Dead: Hold RMB
+- Toggle Simulation: Space Bar 
+- Reset Grid: R
+- Move Camera: WASD
+- Boost Camera: Left Shift
+- Zoom In/Out: QE and Scroll Wheel 
 
 ### Goals
 - [X] Create the “Universe” - a square grid with cells that can be “alive” or “dead,” represented by two different colors. The universe is infinite in theory, but you might want to pick a grid size that can fit within a computer’s memory 

@@ -80,8 +80,8 @@ title = "Controls"
 [node name="ControlsLabel" type="Label" parent="PanelContainer/FoldableContainer/GridContainer/ControlsFoldableContainer" unique_id=902435894]
 visible = false
 layout_mode = 2
-text = "Set Alive: Hold LMB
-Set Dead: Hold RMB
+text = "Set Cell Alive: Hold LMB
+Set Cell Dead: Hold RMB
 Toggle Simulation: Space Bar 
 Reset Grid: R
 Move Camera: WASD
