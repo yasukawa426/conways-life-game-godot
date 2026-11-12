@@ -18,5 +18,6 @@ func _process(delta: float) -> void:
 		zoom += Vector2.ONE * ZOOM_AMOUNT * delta
 	if Input.is_action_pressed("zoom_out"):
 		zoom -= Vector2.ONE * ZOOM_AMOUNT * delta
-	
-	zoom = zoom.clampf(1, 400)
+	position += Vector2(horizontal, vertical) * speed * delta
+	position = position.clamp(Vector2(200, 170), Vector2(1700, 900))
+	zoom = zoom.clampf(1, 6.5)
