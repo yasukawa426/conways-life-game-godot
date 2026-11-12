@@ -13,7 +13,6 @@ grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_t5fjg")
-_size_multiplier = 2.0
 
 [node name="Borders" type="Control" parent="." unique_id=1848244730]
 visible = false

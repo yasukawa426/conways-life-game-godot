@@ -24,38 +24,40 @@ var _cell_size: Vector2
 ##]
 ##[/code]
 var _grid: Array[Array] = []
-
 var _next_grid: Array[Array] = []
 
-var _cell_count = _scaled_size.x * _scaled_size.y
+const _BASE_SIMULATION_WAIT_TIME: float = 0.1
+var _simulation_wait_time: float = _BASE_SIMULATION_WAIT_TIME
+var speed_multiplier: float = 1:
+	set(value):
+		speed_multiplier = value
+		
+		_simulation_wait_time = _BASE_SIMULATION_WAIT_TIME / value
+		$SimulationTimer.wait_time = _simulation_wait_time
+		
+		if _simulation_running:
+			$SimulationTimer.start()
 
+var _simulation_running: bool = false
 
 #TODO: make timer oneshot and then call it again after the simulation() has finished running, buttons and stuff. hold left mouse button. draw border once in a separete node ultil needed again. also LMB only to dray RMB only to delete
-@export var _size_multiplier: float = 0.2:
+var size_multiplier: float = 0.5:
 	get:
-		return _size_multiplier
+		return size_multiplier
 	set(value):
-		_size_multiplier = value
+		size_multiplier = value
+		
+		_update_grid()
 
-		_scaled_size = value * _BASE_GRID_SIZE
-		_cell_count = _scaled_size.x * _scaled_size.y
-
-var _scaled_size: Vector2i = _size_multiplier * _BASE_GRID_SIZE
+var _scaled_size: Vector2i = size_multiplier * _BASE_GRID_SIZE
 
 func _ready() -> void:
-	print("number of cells: ", _cell_count)
+	$SimulationTimer.wait_time = _simulation_wait_time
+	print("grid size:", _scaled_size)
 	simulation_timer.paused = true
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
 	size = get_viewport_rect().size
 	_update_grid()
-
-	_grid.resize(_scaled_size.y)
-	for y in range(_scaled_size.y):
-		_grid[y] = []
-		_grid[y].resize(_scaled_size.x)
-		_grid[y].fill(false) # cells start dead
-	
-	_next_grid = _grid.duplicate_deep()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
@@ -63,9 +65,12 @@ func _notification(what: int) -> void:
 
 
 func _update_grid() -> void:
+	_scaled_size = size_multiplier * _BASE_GRID_SIZE
+	_reset_arrays()
+
 	var avaible_space := size * _GRID_SCALE # the maximum amount of space the grid can occupy
 	var cell_size: float = min(avaible_space.x / _scaled_size.x, avaible_space.y / _scaled_size.y) # calculate how large it can be in each axis and still fit all cells into the grid and then pick the lowest
-
+	
 	_cell_size = Vector2.ONE * cell_size # use its result as the cell size
 
 	queue_redraw()
@@ -179,10 +184,21 @@ func _apply_rules(is_alive: bool, alive_neighbors_count: int) -> bool:
 		return alive_neighbors_count == 3
 	
 func toggle_simulation(running: bool):
+	_simulation_running = !running
 	$SimulationTimer.paused = !running
 	$SimulationTimer.start()
+	
 
 
 func _on_simulation_timer_timeout() -> void:
 	_simulate()
 	queue_redraw()
+
+func _reset_arrays() -> void:
+	_grid.resize(_scaled_size.y)
+	for y in range(_scaled_size.y):
+		_grid[y] = []
+		_grid[y].resize(_scaled_size.x)
+		_grid[y].fill(false) # cells start dead
+	
+	_next_grid = _grid.duplicate_deep()
