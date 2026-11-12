@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://87sqn3gmqdkx" path="res://scenes/grid.tscn" id="1_0wfyh"]
 [ext_resource type="Script" uid="uid://cms73t3dd1f35" path="res://scenes/main.gd" id="1_jyhfs"]
 [ext_resource type="Script" uid="uid://cn531hnr6fobs" path="res://scenes/camera_2d.gd" id="2_0wfyh"]
-[ext_resource type="Script" uid="uid://qu10ihcyhi6e" path="res://scenes/ui.gd" id="4_tbgi4"]
+[ext_resource type="PackedScene" uid="uid://ct3weancc8hkn" path="res://scenes/ui.tscn" id="4_jyhfs"]
 
 [node name="Main" type="Node2D" unique_id=759630922]
 script = ExtResource("1_jyhfs")
@@ -21,89 +21,9 @@ color = Color(0.02721747, 0.18793595, 0.23219019, 1)
 position = Vector2(960, 540)
 script = ExtResource("2_0wfyh")
 
-[node name="UI" type="CanvasLayer" parent="." unique_id=124896397]
-script = ExtResource("4_tbgi4")
-
-[node name="FoldableContainer" type="VBoxContainer" parent="UI" unique_id=1344488924]
-offset_left = 13.0
-offset_top = 13.0
-offset_right = 221.0
-offset_bottom = 133.0
-
-[node name="GridContainer" type="GridContainer" parent="UI/FoldableContainer" unique_id=1416057586]
-custom_minimum_size = Vector2(200, 0)
-layout_mode = 2
-size_flags_horizontal = 4
-
-[node name="BoxContainer" type="BoxContainer" parent="UI/FoldableContainer/GridContainer" unique_id=584853397]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SizeLabel" type="Label" parent="UI/FoldableContainer/GridContainer/BoxContainer" unique_id=1925441670]
-custom_minimum_size = Vector2(54, 0)
-layout_mode = 2
-text = "Size: "
-
-[node name="SizeHSlider" type="HSlider" parent="UI/FoldableContainer/GridContainer/BoxContainer" unique_id=92894075]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-min_value = 0.5
-value = 50.5
-ticks_position = 3
-
-[node name="SizeTimer" type="Timer" parent="UI/FoldableContainer/GridContainer/BoxContainer/SizeHSlider" unique_id=1349743410]
-wait_time = 0.05
-one_shot = true
-
-[node name="BoxContainer2" type="BoxContainer" parent="UI/FoldableContainer/GridContainer" unique_id=1308675131]
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SpeedLabel" type="Label" parent="UI/FoldableContainer/GridContainer/BoxContainer2" unique_id=814083249]
-layout_mode = 2
-text = "Speed:"
-
-[node name="SpeedHSlider" type="HSlider" parent="UI/FoldableContainer/GridContainer/BoxContainer2" unique_id=1560190664]
-layout_mode = 2
-size_flags_horizontal = 3
-step = 10.0
-
-[node name="SpeedTimer" type="Timer" parent="UI/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" unique_id=1315302910]
-one_shot = true
-
-[node name="ControlsFoldableContainer" type="FoldableContainer" parent="UI/FoldableContainer/GridContainer" unique_id=103862757]
-layout_mode = 2
-folded = true
-title = "Controls"
-
-[node name="ControlsLabel" type="Label" parent="UI/FoldableContainer/GridContainer/ControlsFoldableContainer" unique_id=397612050]
-visible = false
-layout_mode = 2
-text = "Set Alive: Hold LMB
-Set Dead: Hold RMB
-Toggle Simulation: Space Bar 
-Reset Grid: R
-Move Camera: WASD
-Boost Camera: Left Shift
-Zoom In/Out: QE and Scroll Wheel "
-
-[node name="ResetButton" type="Button" parent="UI/FoldableContainer/GridContainer" unique_id=1335189915]
-layout_mode = 2
-text = "RESET"
-
-[node name="ToggleSimulationButton" type="Button" parent="UI/FoldableContainer/GridContainer" unique_id=1937507221]
-custom_minimum_size = Vector2(80, 0)
-layout_mode = 2
-text = "START"
+[node name="UI" parent="." unique_id=1380324904 instance=ExtResource("4_jyhfs")]
 
 [connection signal="reset" from="UI" to="." method="_on_ui_reset"]
 [connection signal="size_changed" from="UI" to="." method="_on_ui_size_changed"]
 [connection signal="speed_changed" from="UI" to="." method="_on_ui_speed_changed"]
 [connection signal="toggle_simulation" from="UI" to="." method="_on_ui_toggle_simulation"]
-[connection signal="value_changed" from="UI/FoldableContainer/GridContainer/BoxContainer/SizeHSlider" to="UI" method="_on_size_h_slider_value_changed"]
-[connection signal="timeout" from="UI/FoldableContainer/GridContainer/BoxContainer/SizeHSlider/SizeTimer" to="UI" method="_on_size_timer_timeout"]
-[connection signal="value_changed" from="UI/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" to="UI" method="_on_speed_h_slider_value_changed"]
-[connection signal="timeout" from="UI/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider/SpeedTimer" to="UI" method="_on_speed_timer_timeout"]
-[connection signal="pressed" from="UI/FoldableContainer/GridContainer/ResetButton" to="UI" method="_on_reset_button_pressed"]
-[connection signal="pressed" from="UI/FoldableContainer/GridContainer/ToggleSimulationButton" to="UI" method="_on_toggle_simulation_button_pressed"]

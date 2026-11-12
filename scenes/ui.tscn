@@ -1,0 +1,86 @@
+[gd_scene format=3 uid="uid://ct3weancc8hkn"]
+
+[ext_resource type="Script" uid="uid://qu10ihcyhi6e" path="res://scenes/ui.gd" id="1_nt7q6"]
+
+[node name="UI" type="CanvasLayer" unique_id=1380324904]
+script = ExtResource("1_nt7q6")
+
+[node name="FoldableContainer" type="VBoxContainer" parent="." unique_id=233455515]
+offset_left = 13.0
+offset_top = 13.0
+offset_right = 221.0
+offset_bottom = 133.0
+
+[node name="GridContainer" type="GridContainer" parent="FoldableContainer" unique_id=671889576]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="BoxContainer" type="BoxContainer" parent="FoldableContainer/GridContainer" unique_id=912768755]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SizeLabel" type="Label" parent="FoldableContainer/GridContainer/BoxContainer" unique_id=316227432]
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+text = "Size: "
+
+[node name="SizeHSlider" type="HSlider" parent="FoldableContainer/GridContainer/BoxContainer" unique_id=436243236]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+value = 50.5
+ticks_position = 3
+
+[node name="SizeTimer" type="Timer" parent="FoldableContainer/GridContainer/BoxContainer/SizeHSlider" unique_id=87062642]
+wait_time = 0.05
+one_shot = true
+
+[node name="BoxContainer2" type="BoxContainer" parent="FoldableContainer/GridContainer" unique_id=420336875]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpeedLabel" type="Label" parent="FoldableContainer/GridContainer/BoxContainer2" unique_id=1158022846]
+layout_mode = 2
+text = "Speed:"
+
+[node name="SpeedHSlider" type="HSlider" parent="FoldableContainer/GridContainer/BoxContainer2" unique_id=1469121893]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 10.0
+
+[node name="SpeedTimer" type="Timer" parent="FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" unique_id=1340194873]
+one_shot = true
+
+[node name="ControlsFoldableContainer" type="FoldableContainer" parent="FoldableContainer/GridContainer" unique_id=160018656]
+layout_mode = 2
+folded = true
+title = "Controls"
+
+[node name="ControlsLabel" type="Label" parent="FoldableContainer/GridContainer/ControlsFoldableContainer" unique_id=902435894]
+visible = false
+layout_mode = 2
+text = "Set Alive: Hold LMB
+Set Dead: Hold RMB
+Toggle Simulation: Space Bar 
+Reset Grid: R
+Move Camera: WASD
+Boost Camera: Left Shift
+Zoom In/Out: QE and Scroll Wheel "
+
+[node name="ResetButton" type="Button" parent="FoldableContainer/GridContainer" unique_id=1578311269]
+layout_mode = 2
+text = "RESET"
+
+[node name="ToggleSimulationButton" type="Button" parent="FoldableContainer/GridContainer" unique_id=2004651856]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "START"
+
+[connection signal="value_changed" from="FoldableContainer/GridContainer/BoxContainer/SizeHSlider" to="." method="_on_size_h_slider_value_changed"]
+[connection signal="timeout" from="FoldableContainer/GridContainer/BoxContainer/SizeHSlider/SizeTimer" to="." method="_on_size_timer_timeout"]
+[connection signal="value_changed" from="FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" to="." method="_on_speed_h_slider_value_changed"]
+[connection signal="timeout" from="FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider/SpeedTimer" to="." method="_on_speed_timer_timeout"]
+[connection signal="pressed" from="FoldableContainer/GridContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="FoldableContainer/GridContainer/ToggleSimulationButton" to="." method="_on_toggle_simulation_button_pressed"]
