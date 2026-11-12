@@ -1,7 +1,7 @@
 extends Control
 
 const _BACKGROUND_COLOR: Color = Color("#20252B")
-const _ALIVE_CELL_COLOR: Color = Color.YELLOW
+const _ALIVE_CELL_COLOR: Color = Color.GREEN
 const _CELL_BORDER_COLOR: Color = Color("#343B44")
 
 # The amount of cell inside the grid
