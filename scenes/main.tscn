@@ -87,15 +87,22 @@ Reset Grid: R
 Move Camera: WASD
 Zoom In/Out: QE and Scroll Wheel "
 
+[node name="ResetButton" type="Button" parent="UI/FoldableContainer/GridContainer" unique_id=1335189915]
+layout_mode = 2
+text = "RESET"
+
 [node name="ToggleSimulationButton" type="Button" parent="UI/FoldableContainer/GridContainer" unique_id=1937507221]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "START"
 
+[connection signal="reset" from="UI" to="." method="_on_ui_reset"]
 [connection signal="size_changed" from="UI" to="." method="_on_ui_size_changed"]
 [connection signal="speed_changed" from="UI" to="." method="_on_ui_speed_changed"]
+[connection signal="toggle_simulation" from="UI" to="." method="_on_ui_toggle_simulation"]
 [connection signal="value_changed" from="UI/FoldableContainer/GridContainer/BoxContainer/SizeHSlider" to="UI" method="_on_size_h_slider_value_changed"]
 [connection signal="timeout" from="UI/FoldableContainer/GridContainer/BoxContainer/SizeHSlider/SizeTimer" to="UI" method="_on_size_timer_timeout"]
 [connection signal="value_changed" from="UI/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" to="UI" method="_on_speed_h_slider_value_changed"]
 [connection signal="timeout" from="UI/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider/SpeedTimer" to="UI" method="_on_speed_timer_timeout"]
-[connection signal="pressed" from="UI/FoldableContainer/GridContainer/ToggleSimulationButton" to="." method="_on_toggle_simulation_button_pressed"]
+[connection signal="pressed" from="UI/FoldableContainer/GridContainer/ResetButton" to="UI" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="UI/FoldableContainer/GridContainer/ToggleSimulationButton" to="UI" method="_on_toggle_simulation_button_pressed"]

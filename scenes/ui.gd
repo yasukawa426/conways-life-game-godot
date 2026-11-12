@@ -1,6 +1,8 @@
 extends CanvasLayer
 signal size_changed(value: float)
 signal speed_changed(value: float)
+signal toggle_simulation
+signal reset
 
 const STOP_TEXT = "STOP"
 const START_TEXT = "START"
@@ -47,3 +49,11 @@ func _on_size_h_slider_value_changed(_value: float) -> void:
 
 func _on_speed_h_slider_value_changed(_value: float) -> void:
 	speed_timer.start()
+
+
+func _on_toggle_simulation_button_pressed() -> void:
+	toggle_simulation.emit()
+
+
+func _on_reset_button_pressed() -> void:
+	reset.emit()

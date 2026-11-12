@@ -42,6 +42,9 @@ func _ready() -> void:
 func _input(event: InputEvent) -> void:
 	if event.is_action_released("toggle_simulation"):
 		simulation_running = !simulation_running
+	
+	if event.is_action_released("reset"):
+		_reset()
 
 func _set_speed_slider() -> void:
 	$UI.set_up_speed_slider(MINIMUM_SPEED_MULTIPLIER, MAXIMUM_SPEED_MULTIPLIER, speed_multiplier_step, current_speed_multiplier)
@@ -50,7 +53,7 @@ func _set_size_slider() -> void:
 	$UI.set_up_size_slider(MINIMUM_GRID_MULTIPLIER, MAXIMUM_GRID_MULTIPLIER, size_multiplier_step, current_grid_multiplier)
 
 
-func _on_toggle_simulation_button_pressed() -> void:
+func _on_ui_toggle_simulation() -> void:
 	simulation_running = !simulation_running
 
 
@@ -60,3 +63,11 @@ func _on_ui_size_changed(value: float) -> void:
 
 func _on_ui_speed_changed(value: float) -> void:
 	current_speed_multiplier = value
+
+
+func _on_ui_reset() -> void:
+	_reset()
+
+func _reset() -> void:
+	simulation_running = false
+	$Grid.reset_grid()

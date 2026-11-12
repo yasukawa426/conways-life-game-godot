@@ -202,3 +202,7 @@ func _reset_arrays() -> void:
 		_grid[y].fill(false) # cells start dead
 	
 	_next_grid = _grid.duplicate_deep()
+
+func reset_grid():
+	_reset_arrays()
+	queue_redraw()
