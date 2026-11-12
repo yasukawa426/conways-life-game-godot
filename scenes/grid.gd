@@ -102,14 +102,16 @@ func _draw() -> void:
 
 func _gui_input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.pressed:
-		if event.button_index == MOUSE_BUTTON_LEFT:
+
+		if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
+			var is_left: bool = event.button_index == MOUSE_BUTTON_LEFT 
 			# calculate which cell it is based on the click position
 			var offset := (size - Vector2(_scaled_size) * _cell_size) / 2
 			var cell := Vector2i((event.position - offset) / _cell_size)
 
 			# only allow clicking inside the grid
 			if cell.x >= 0 and cell.x < _scaled_size.x and cell.y >= 0 and cell.y < _scaled_size.y:
-				_grid[cell.y][cell.x] = not _grid[cell.y][cell.x]
+				_grid[cell.y][cell.x] = is_left #left - alive; right - dead
 				queue_redraw()
 
 #Rules:
