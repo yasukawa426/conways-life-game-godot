@@ -88,6 +88,7 @@ func _update_grid() -> void:
 	
 	_cell_size = Vector2.ONE * cell_size # use its result as the cell size
 	
+	print("New size: ", _scaled_size, _cell_size)
 	queue_redraw()
 
 
@@ -128,15 +129,9 @@ func _simulate() -> void:
 		y = 0
 		x += 1
 	
-	var temp: Array = []
-	temp.append_array(_grid)
-	
-	_grid.clear()
-	_grid.append_array(_next_grid)
-	
-	_next_grid.clear()
-	_next_grid.append_array(temp)
-
+	var temp = _grid
+	_grid = _next_grid
+	_next_grid = temp
 
 	queue_redraw()
 
@@ -149,14 +144,15 @@ func _get_alive_neighbors_count(x: int, y: int) -> int:
 		if i < 0 or i > (_grid.size() - 1):
 			continue
 
+		var row = _grid[i]
 		for j in range(y - 1, y + 2):
 			if x == i and j == y: # if it is the cell we are at instead of a neighbour
 				continue
-			if j > (_grid[x].size() - 1) or j < 0: # if it is out of bounds
+			if j > (row.size() - 1) or j < 0: # if it is out of bounds
 				continue
 
 			# neighbors.append(_grid[i][j])
-			if _grid[i][j] == true:
+			if row[j] == true:
 				alive_count += 1
 
 
