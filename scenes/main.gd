@@ -71,3 +71,7 @@ func _on_ui_reset() -> void:
 func _reset() -> void:
 	simulation_running = false
 	$Grid.reset_grid()
+
+
+func _on_ui_exit() -> void:
+	get_tree().quit(0)

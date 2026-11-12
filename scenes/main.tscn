@@ -23,6 +23,7 @@ script = ExtResource("2_0wfyh")
 
 [node name="UI" parent="." unique_id=1380324904 instance=ExtResource("4_jyhfs")]
 
+[connection signal="exit" from="UI" to="." method="_on_ui_exit"]
 [connection signal="reset" from="UI" to="." method="_on_ui_reset"]
 [connection signal="size_changed" from="UI" to="." method="_on_ui_size_changed"]
 [connection signal="speed_changed" from="UI" to="." method="_on_ui_speed_changed"]

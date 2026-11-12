@@ -3,6 +3,7 @@ signal size_changed(value: float)
 signal speed_changed(value: float)
 signal toggle_simulation
 signal reset
+signal exit
 
 const STOP_TEXT = "STOP"
 const START_TEXT = "START"
@@ -56,3 +57,7 @@ func _on_toggle_simulation_button_pressed() -> void:
 
 func _on_reset_button_pressed() -> void:
 	reset.emit()
+
+
+func _on_exit_button_pressed() -> void:
+	exit.emit()
