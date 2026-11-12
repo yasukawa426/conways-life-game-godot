@@ -15,12 +15,11 @@ size_flags_vertical = 4
 script = ExtResource("1_t5fjg")
 
 [node name="Borders" type="Control" parent="." unique_id=1848244730]
-visible = false
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="SimulationTimer" type="Timer" parent="." unique_id=685790305]
-wait_time = 0.1
+one_shot = true
 
 [connection signal="timeout" from="SimulationTimer" to="." method="_on_simulation_timer_timeout"]
