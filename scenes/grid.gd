@@ -30,7 +30,7 @@ var _next_grid: Array[Array] = []
 var _cell_count = _scaled_size.x * _scaled_size.y
 
 
-#TODO: make timer oneshot and then call it again after the simulation() has finished running, buttons and stuff. hold left mouse button. draw border once in a separete node ultil needed again.
+#TODO: make timer oneshot and then call it again after the simulation() has finished running, buttons and stuff. hold left mouse button. draw border once in a separete node ultil needed again. also LMB only to dray RMB only to delete
 @export var _size_multiplier: float = 0.2:
 	get:
 		return _size_multiplier
@@ -139,11 +139,6 @@ func _simulate() -> void:
 
 	queue_redraw()
 
-func _input(event: InputEvent) -> void:
-	if event.is_action_released("toggle_simulation"):
-		simulation_timer.paused = !simulation_timer.paused
-		simulation_timer.start()
-
 # what is a neigbouhr?: given (x,y) everyone from (x-1, y-1) to (x+1, y+1) minus (x,y) - see neighbours.png
 func _get_alive_neighbors_count(x: int, y: int) -> int:
 	# var neighbors: Array[bool]
@@ -182,6 +177,10 @@ func _apply_rules(is_alive: bool, alive_neighbors_count: int) -> bool:
 	
 	else:
 		return alive_neighbors_count == 3
+	
+func toggle_simulation(running: bool):
+	$SimulationTimer.paused = !running
+	$SimulationTimer.start()
 
 
 func _on_simulation_timer_timeout() -> void:
