@@ -80,8 +80,8 @@ title = "Controls"
 [node name="ControlsLabel" type="Label" parent="UI/FoldableContainer/GridContainer/ControlsFoldableContainer" unique_id=397612050]
 visible = false
 layout_mode = 2
-text = "Set Alive: LMB
-Set Dead: RMB
+text = "Set Alive: Hold LMB
+Set Dead: Hold RMB
 Toggle Simulation: Space Bar 
 Reset Grid: R
 Move Camera: WASD

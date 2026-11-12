@@ -59,6 +59,21 @@ func _ready() -> void:
 	size = get_viewport_rect().size
 	_update_grid()
 
+func _process(_delta: float) -> void:
+	var mouse_pressed = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)
+	if mouse_pressed:
+
+		var mouse_position: Vector2 = get_local_mouse_position()
+		var is_left: bool = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
+		# calculate which cell it is based on the click position
+		var offset := (size - Vector2(_scaled_size) * _cell_size) / 2
+		var cell := Vector2i((mouse_position - offset) / _cell_size)
+
+		# only allow clicking inside the grid
+		if cell.x >= 0 and cell.x < _scaled_size.x and cell.y >= 0 and cell.y < _scaled_size.y:
+			_grid[cell.y][cell.x] = is_left #left - alive; right - dead
+			queue_redraw()
+
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_RESIZED:
 		_update_grid()
@@ -100,19 +115,6 @@ func _draw() -> void:
 	for x in range(_scaled_size.x + 1):
 		draw_line(Vector2((_cell_size.x * x) + offset.x, offset.y), Vector2((_cell_size.x * x) + offset.x, size.y - offset.y), _CELL_BORDER_COLOR, _BORDER_WIDTH)
 
-func _gui_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.pressed:
-
-		if event.button_index == MOUSE_BUTTON_LEFT or event.button_index == MOUSE_BUTTON_RIGHT:
-			var is_left: bool = event.button_index == MOUSE_BUTTON_LEFT 
-			# calculate which cell it is based on the click position
-			var offset := (size - Vector2(_scaled_size) * _cell_size) / 2
-			var cell := Vector2i((event.position - offset) / _cell_size)
-
-			# only allow clicking inside the grid
-			if cell.x >= 0 and cell.x < _scaled_size.x and cell.y >= 0 and cell.y < _scaled_size.y:
-				_grid[cell.y][cell.x] = is_left #left - alive; right - dead
-				queue_redraw()
 
 #Rules:
 # Any live cell with fewer than two live neighbors dies.
