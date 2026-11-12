@@ -1,5 +1,5 @@
 extends Camera2D
-const BASE_SPEED: float = 500.0
+const BASE_SPEED: float = 1000.0
 const BOOST_MULTIPLIER: float = 2
 const ZOOM_AMOUNT: float = 2
 
@@ -25,3 +25,11 @@ func _process(delta: float) -> void:
 	position += Vector2(horizontal, vertical) * speed * delta
 	position = position.clamp(Vector2(200, 170), Vector2(1700, 900))
 	zoom = zoom.clampf(1, 6.5)
+
+func _input(event: InputEvent) -> void:
+	# scroll wheel is only detected by action released
+	if event is InputEventMouseButton:
+		if event.is_action_released("zoom_in"):
+			zoom += ZOOM_AMOUNT * Vector2.ONE / 10
+		elif event.is_action_released("zoom_out"):
+			zoom -= ZOOM_AMOUNT * Vector2.ONE / 10
