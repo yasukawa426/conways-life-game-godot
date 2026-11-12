@@ -8,15 +8,15 @@ const STOP_TEXT = "STOP"
 const START_TEXT = "START"
 const DEBOUNCE_TIMER_WAIT_TIME: float = 0.05
 
-@onready var toggle_simulation_button: Button = $FoldableContainer/GridContainer/ToggleSimulationButton
-@onready var speed_slider: HSlider = $FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider
+@onready var toggle_simulation_button: Button = $PanelContainer/FoldableContainer/GridContainer/ToggleSimulationButton
+@onready var speed_slider: HSlider = $PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider
 @onready var speed_timer: Timer = speed_slider.get_child(0) # SpeedTimer
-@onready var size_slider: HSlider = $FoldableContainer/GridContainer/BoxContainer/SizeHSlider
+@onready var size_slider: HSlider = $PanelContainer/FoldableContainer/GridContainer/BoxContainer/SizeHSlider
 @onready var size_timer: Timer = size_slider.get_child(0) # /SizeTimer
 
 
 func _ready() -> void:
-	$FoldableContainer/GridContainer/BoxContainer2/SpeedLabel.custom_minimum_size = $FoldableContainer/GridContainer/BoxContainer/SizeLabel.custom_minimum_size
+	$PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedLabel.custom_minimum_size = $PanelContainer/FoldableContainer/GridContainer/BoxContainer/SizeLabel.custom_minimum_size
 	toggle_simulation_button.text = START_TEXT
 	size_timer.wait_time = DEBOUNCE_TIMER_WAIT_TIME
 	speed_timer.wait_time = DEBOUNCE_TIMER_WAIT_TIME
@@ -35,7 +35,6 @@ func set_up_size_slider(minimum_value: float, maximum_value: float, step: float,
 	size_slider.max_value = maximum_value
 	size_slider.step = step
 	size_slider.value = initial_value
-
 
 
 func _on_size_timer_timeout() -> void:
