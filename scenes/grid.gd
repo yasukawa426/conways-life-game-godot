@@ -33,10 +33,10 @@ var speed_multiplier: float = 1:
 		speed_multiplier = value
 		
 		_simulation_wait_time = _BASE_SIMULATION_WAIT_TIME / value
-		$SimulationTimer.wait_time = _simulation_wait_time
+		simulation_timer.wait_time = _simulation_wait_time
 		
 		if _simulation_running:
-			$SimulationTimer.start()
+			simulation_timer.start()
 
 var _simulation_running: bool = false
 
@@ -52,7 +52,7 @@ var size_multiplier: float = 0.5:
 var _scaled_size: Vector2i = size_multiplier * _BASE_GRID_SIZE
 
 func _ready() -> void:
-	$SimulationTimer.wait_time = _simulation_wait_time
+	simulation_timer.wait_time = _simulation_wait_time
 	print("grid size:", _scaled_size)
 	simulation_timer.paused = true
 	set_anchors_and_offsets_preset(Control.PRESET_FULL_RECT)
@@ -92,7 +92,6 @@ func _update_grid() -> void:
 
 
 func _draw() -> void:
-	print("Control size: ", size)
 	var dimensions: Vector2 = Vector2(_scaled_size) * _cell_size # the actual size of the grid
 	var offset := (size - dimensions) / 2 # the empty space before the grid so it can be centered
 
@@ -123,7 +122,6 @@ func _draw() -> void:
 # Any dead cell with exactly three live neighbors becomes alive in the next generation.
 # what is a neigbouhr?: given (x,y) everyone from (x-1, y-1) to (x+1, y+1) minus (x,y) - see neighbours.png
 func _simulate() -> void:
-	#print(_grid)
 	var x = 0
 	var y = 0
 	for row in _grid:
@@ -189,14 +187,15 @@ func _apply_rules(is_alive: bool, alive_neighbors_count: int) -> bool:
 	
 func toggle_simulation(running: bool):
 	_simulation_running = running
-	$SimulationTimer.paused = !running
-	$SimulationTimer.start()
+	simulation_timer.paused = !running
+	simulation_timer.start()
 	
 
 
 func _on_simulation_timer_timeout() -> void:
 	_simulate()
 	queue_redraw()
+	simulation_timer.start()
 
 func _reset_arrays() -> void:
 	_grid.resize(_scaled_size.y)
