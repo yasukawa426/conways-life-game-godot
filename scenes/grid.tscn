@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://87sqn3gmqdkx"]
 
 [ext_resource type="Script" uid="uid://b434wqqp2adaj" path="res://scenes/grid.gd" id="1_t5fjg"]
+[ext_resource type="Script" uid="uid://dm1pnceg0ifaa" path="res://scenes/borders_visual.gd" id="2_w88cy"]
 
 [node name="Grid" type="Control" unique_id=212534723]
 z_index = 10
@@ -14,10 +15,22 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_t5fjg")
 
-[node name="Borders" type="Control" parent="." unique_id=1848244730]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+[node name="GridVisual" type="Control" parent="." unique_id=1803377268]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BordersVisual" type="Control" parent="." unique_id=1848244730]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_w88cy")
 
 [node name="SimulationTimer" type="Timer" parent="." unique_id=685790305]
 one_shot = true

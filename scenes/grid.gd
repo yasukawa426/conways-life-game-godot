@@ -62,7 +62,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	var mouse_pressed = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT) or Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT)
 	if mouse_pressed:
-
 		var mouse_position: Vector2 = get_local_mouse_position()
 		var is_left: bool = Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)
 		# calculate which cell it is based on the click position
@@ -71,7 +70,7 @@ func _process(_delta: float) -> void:
 
 		# only allow clicking inside the grid
 		if cell.x >= 0 and cell.x < _scaled_size.x and cell.y >= 0 and cell.y < _scaled_size.y:
-			_grid[cell.y][cell.x] = is_left #left - alive; right - dead
+			_grid[cell.y][cell.x] = is_left # left - alive; right - dead
 			queue_redraw()
 
 func _notification(what: int) -> void:
@@ -86,8 +85,9 @@ func _update_grid() -> void:
 	var avaible_space := size * _GRID_SCALE # the maximum amount of space the grid can occupy
 	var cell_size: float = min(avaible_space.x / _scaled_size.x, avaible_space.y / _scaled_size.y) # calculate how large it can be in each axis and still fit all cells into the grid and then pick the lowest
 	
+	
 	_cell_size = Vector2.ONE * cell_size # use its result as the cell size
-
+	
 	queue_redraw()
 
 
@@ -105,16 +105,10 @@ func _draw() -> void:
 			if _grid[y][x]:
 				var rect_position := offset + Vector2(x, y) * _cell_size
 				draw_rect(Rect2(rect_position, _cell_size), _ALIVE_CELL_COLOR) # paint it
+	
+	$BordersVisual.draw_borders(offset, _scaled_size, _cell_size)
 
-	# draw horizontal borders
-	for y in range(_scaled_size.y + 1):
-		draw_line(Vector2(offset.x, (_cell_size.y * y) + offset.y), Vector2(size.x - offset.x, (_cell_size.y * y) + offset.y), _CELL_BORDER_COLOR, _BORDER_WIDTH)
-
-	# draw vertical borders	
-	for x in range(_scaled_size.x + 1):
-		draw_line(Vector2((_cell_size.x * x) + offset.x, offset.y), Vector2((_cell_size.x * x) + offset.x, size.y - offset.y), _CELL_BORDER_COLOR, _BORDER_WIDTH)
-
-
+	
 #Rules:
 # Any live cell with fewer than two live neighbors dies.
 # Any live cell with two or three neighbors lives on in the next generation.
@@ -190,7 +184,6 @@ func toggle_simulation(running: bool):
 	simulation_timer.paused = !running
 	simulation_timer.start()
 	
-
 
 func _on_simulation_timer_timeout() -> void:
 	_simulate()
