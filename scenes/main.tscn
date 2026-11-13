@@ -8,7 +8,7 @@
 [node name="Main" type="Node2D" unique_id=759630922]
 script = ExtResource("1_jyhfs")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=2056994404]
+[node name="BackgroundColorRect" type="ColorRect" parent="." unique_id=2056994404]
 offset_left = -3065.0
 offset_top = -1610.0
 offset_right = 4935.0
@@ -16,6 +16,7 @@ offset_bottom = 2390.0
 color = Color(0.02721747, 0.18793595, 0.23219019, 1)
 
 [node name="Grid" parent="." unique_id=212534723 instance=ExtResource("1_0wfyh")]
+metadata/_edit_use_anchors_ = true
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=918038106]
 position = Vector2(960, 540)
