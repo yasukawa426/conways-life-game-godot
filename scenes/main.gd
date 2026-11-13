@@ -24,7 +24,7 @@ var simulation_running: bool = false:
 		grid_node.toggle_simulation(value)
 
 const MINIMUM_SPEED_MULTIPLIER: float = 0.25
-const MAXIMUM_SPEED_MULTIPLIER: float = 2
+const MAXIMUM_SPEED_MULTIPLIER: float = 4
 
 var speed_multiplier_step: float = (MAXIMUM_SPEED_MULTIPLIER - MINIMUM_SPEED_MULTIPLIER) / 50; # ~50 positions on the slider
 var current_speed_multiplier: float = 1:
