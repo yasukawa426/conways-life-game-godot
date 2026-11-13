@@ -29,4 +29,5 @@ script = ExtResource("2_0wfyh")
 [connection signal="reset" from="UI" to="." method="_on_ui_reset"]
 [connection signal="size_changed" from="UI" to="." method="_on_ui_size_changed"]
 [connection signal="speed_changed" from="UI" to="." method="_on_ui_speed_changed"]
+[connection signal="toggle_borders" from="UI" to="." method="_on_ui_toggle_borders"]
 [connection signal="toggle_simulation" from="UI" to="." method="_on_ui_toggle_simulation"]

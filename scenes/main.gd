@@ -9,7 +9,7 @@ var current_grid_multiplier: float = 0.5:
 	
 	set(value):
 		current_grid_multiplier = value
-		$Grid.size_multiplier = value
+		grid_node.size_multiplier = value
 		
 		simulation_running = false
 
@@ -21,7 +21,7 @@ var simulation_running: bool = false:
 		simulation_running = value
 		
 		ui_node.update_toggle_button(value)
-		$Grid.toggle_simulation(value)
+		grid_node.toggle_simulation(value)
 
 const MINIMUM_SPEED_MULTIPLIER: float = 0.25
 const MAXIMUM_SPEED_MULTIPLIER: float = 2
@@ -33,9 +33,10 @@ var current_speed_multiplier: float = 1:
 	
 	set(value):
 		current_speed_multiplier = value
-		$Grid.speed_multiplier = value
+		grid_node.speed_multiplier = value
 		
 @onready var ui_node = $UI
+@onready var grid_node = $Grid
 
 func _ready() -> void:
 	_set_size_slider()
@@ -72,7 +73,7 @@ func _on_ui_reset() -> void:
 
 func _reset() -> void:
 	simulation_running = false
-	$Grid.reset_grid()
+	grid_node.reset_grid()
 
 
 func _on_ui_exit() -> void:
@@ -85,3 +86,7 @@ func _on_grid_generation_changed(value: int) -> void:
 
 func _on_grid_population_changed(value: int) -> void:
 	ui_node.set_population(value)
+
+
+func _on_ui_toggle_borders() -> void:
+	grid_node.toggle_borders()

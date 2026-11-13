@@ -32,3 +32,7 @@ func draw_borders(offset: Vector2, scalled_grid_size: Vector2, cell_size: Vector
 	
 	_initialized = true
 	queue_redraw()
+
+func clear():
+	_initialized = false
+	queue_redraw()

@@ -50,6 +50,7 @@ var speed_multiplier: float = 1:
 			simulation_timer.start()
 
 var _simulation_running: bool = false
+var _show_borders: bool = true
 
 #TODO: make timer oneshot and then call it again after the simulation() has finished running, buttons and stuff. hold left mouse button. draw border once in a separete node ultil needed again. also LMB only to dray RMB only to delete
 var size_multiplier: float = 0.5:
@@ -126,7 +127,9 @@ func _draw() -> void:
 				var rect_position := offset + Vector2(x, y) * _cell_size
 				draw_rect(Rect2(rect_position, _cell_size), _ALIVE_CELL_COLOR) # paint it
 	
-	$BordersVisual.draw_borders(offset, _scaled_size, _cell_size)
+	if _show_borders:
+		$BordersVisual.draw_borders(offset, _scaled_size, _cell_size)
+
 
 	
 #Rules:
@@ -228,3 +231,10 @@ func _reset_arrays() -> void:
 func reset_grid():
 	_reset_arrays()
 	queue_redraw()
+
+func toggle_borders():
+	_show_borders = !_show_borders
+	if _show_borders:
+		queue_redraw()
+	else:
+		$BordersVisual.clear()

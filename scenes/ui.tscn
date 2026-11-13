@@ -101,6 +101,10 @@ custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "START"
 
+[node name="ToggleBordersButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=1095741964]
+layout_mode = 2
+text = "TOGGLE BORDERS"
+
 [node name="ResetButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=1578311269]
 layout_mode = 2
 text = "RESET"
@@ -114,5 +118,6 @@ text = "EXIT"
 [connection signal="value_changed" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" to="." method="_on_speed_h_slider_value_changed"]
 [connection signal="timeout" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider/SpeedTimer" to="." method="_on_speed_timer_timeout"]
 [connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ToggleSimulationButton" to="." method="_on_toggle_simulation_button_pressed"]
+[connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ToggleBordersButton" to="." method="_on_toggle_borders_button_pressed"]
 [connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ExitButton" to="." method="_on_exit_button_pressed"]
