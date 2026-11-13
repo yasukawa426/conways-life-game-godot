@@ -3,9 +3,9 @@
 
 ## Game 5 of 20 - Conway's Game of Life
 
-Its [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) implemented in Godot. 
+Its [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) implemented in Godot. Made in 2 days.
 ### Gameplay Video
-[![Game Screenshot](http://img.youtube.com/vi/VIDEO CODE HERE/0.jpg)](https://youtu.be/VIDEO CODE HERE)
+[![Game Screenshot](http://img.youtube.com/vi/PShm-TCEQ-4/0.jpg)](https://youtu.be/PShm-TCEQ-4)
 
 ### Controls
 - Set Cell Alive: Hold LMB
@@ -26,6 +26,9 @@ Its [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Lif
 	- [X] Any live cell with two or three neighbors lives on in the next generation.
 	- [X] Any live cell with more than three live neighbors dies.
 	- [X] Any dead cell with exactly three live neighbors becomes alive in the next generation.
+
+### Bonus
+- [ ] Add multi-threading
 
 ### Credits
 John Conway for inventing his game of life
