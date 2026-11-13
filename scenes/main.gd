@@ -90,3 +90,4 @@ func _on_ui_toggle_borders() -> void:
 
 func _on_ui_next_generation() -> void:
 	grid_node.simulate()
+	grid_node.queue_redraw()
