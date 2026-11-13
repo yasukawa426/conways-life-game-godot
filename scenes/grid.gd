@@ -1,6 +1,5 @@
 extends Control
-signal population_changed(value: int)
-signal generation_changed(value: int)
+signal generation_changed(generation: int, population: int)
 
 const _BACKGROUND_COLOR: Color = Color("#20252B")
 const _ALIVE_CELL_COLOR: Color = Color.GREEN
@@ -28,14 +27,11 @@ var _cell_size: Vector2
 var _grid: Array[Array] = []
 var _next_grid: Array[Array] = []
 
-var _population: int = 0:
-	set(value):
-		_population = value
-		population_changed.emit(value)
+var _population: int = 0
 var _generation: int = 0:
 		set(value):
 			_generation = value
-			generation_changed.emit(value)
+			generation_changed.emit(value, _population)
 
 const _BASE_SIMULATION_WAIT_TIME: float = 0.1
 var _simulation_wait_time: float = _BASE_SIMULATION_WAIT_TIME
@@ -83,6 +79,7 @@ func _process(_delta: float) -> void:
 		# only allow clicking inside the grid
 		if cell.x >= 0 and cell.x < _scaled_size.x and cell.y >= 0 and cell.y < _scaled_size.y:
 			var current = _grid[cell.y][cell.x]
+			var current_pop = _population
 
 			if current == false and is_left:
 				_population += 1
@@ -90,6 +87,9 @@ func _process(_delta: float) -> void:
 			elif current == true and is_left == false:
 				_population -= 1
 
+			if current_pop != _population:
+				generation_changed.emit(_generation, _population)
+				
 			_grid[cell.y][cell.x] = is_left # left - alive; right - dead
 			queue_redraw()
 

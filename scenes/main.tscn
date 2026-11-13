@@ -24,7 +24,6 @@ script = ExtResource("2_0wfyh")
 [node name="UI" parent="." unique_id=1380324904 instance=ExtResource("4_jyhfs")]
 
 [connection signal="generation_changed" from="Grid" to="." method="_on_grid_generation_changed"]
-[connection signal="population_changed" from="Grid" to="." method="_on_grid_population_changed"]
 [connection signal="exit" from="UI" to="." method="_on_ui_exit"]
 [connection signal="next_generation" from="UI" to="." method="_on_ui_next_generation"]
 [connection signal="reset" from="UI" to="." method="_on_ui_reset"]

@@ -16,7 +16,6 @@ const DEBOUNCE_TIMER_WAIT_TIME: float = 0.05
 @onready var speed_timer: Timer = speed_slider.get_child(0) # SpeedTimer
 @onready var size_slider: HSlider = $PanelContainer/FoldableContainer/GridContainer/BoxContainer/SizeHSlider
 @onready var size_timer: Timer = size_slider.get_child(0) # /SizeTimer
-@onready var population_label: Label = $PanelContainer/FoldableContainer/GridContainer/PopulationLabel
 @onready var generation_label: Label = $PanelContainer/FoldableContainer/GridContainer/GenerationLabel
 
 func _ready() -> void:
@@ -65,14 +64,9 @@ func _on_reset_button_pressed() -> void:
 func _on_exit_button_pressed() -> void:
 	exit.emit()
 	
-func set_generation(value: int) -> void:
+func set_generation(generation: int, population: int) -> void:
 	if generation_label:
-		generation_label.text = "Generation: " + str(value)
-
-func set_population(value: int) -> void:
-	if population_label:
-		population_label.text = "Population: " + str(value)
-
+		generation_label.text = "Generation: " + str(generation) + "\nPopulation: " + str(population)
 
 func _on_toggle_borders_button_pressed() -> void:
 	toggle_borders.emit()

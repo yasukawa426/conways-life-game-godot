@@ -80,12 +80,8 @@ func _on_ui_exit() -> void:
 	get_tree().quit(0)
 
 
-func _on_grid_generation_changed(value: int) -> void:
-	ui_node.set_generation(value)
-
-
-func _on_grid_population_changed(value: int) -> void:
-	ui_node.set_population(value)
+func _on_grid_generation_changed(generation: int, population: int) -> void:
+	ui_node.set_generation(generation, population)
 
 
 func _on_ui_toggle_borders() -> void:
