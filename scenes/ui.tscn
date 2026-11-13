@@ -35,6 +35,14 @@ custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
 size_flags_horizontal = 4
 
+[node name="PopulationLabel" type="Label" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=1590603712]
+layout_mode = 2
+text = "Population: 0"
+
+[node name="GenerationLabel" type="Label" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=301390797]
+layout_mode = 2
+text = "Generation: 0"
+
 [node name="BoxContainer" type="BoxContainer" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=912768755]
 layout_mode = 2
 size_flags_horizontal = 3
@@ -105,6 +113,6 @@ text = "EXIT"
 [connection signal="timeout" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer/SizeHSlider/SizeTimer" to="." method="_on_size_timer_timeout"]
 [connection signal="value_changed" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" to="." method="_on_speed_h_slider_value_changed"]
 [connection signal="timeout" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider/SpeedTimer" to="." method="_on_speed_timer_timeout"]
-[connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ToggleSimulationButton" to="." method="_on_toggle_simulation_button_pressed"]
+[connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ResetButton" to="." method="_on_reset_button_pressed"]
 [connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ExitButton" to="." method="_on_exit_button_pressed"]

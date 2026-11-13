@@ -20,7 +20,7 @@ var simulation_running: bool = false:
 	set(value):
 		simulation_running = value
 		
-		$UI.update_toggle_button(value)
+		ui_node.update_toggle_button(value)
 		$Grid.toggle_simulation(value)
 
 const MINIMUM_SPEED_MULTIPLIER: float = 0.25
@@ -35,6 +35,8 @@ var current_speed_multiplier: float = 1:
 		current_speed_multiplier = value
 		$Grid.speed_multiplier = value
 		
+@onready var ui_node = $UI
+
 func _ready() -> void:
 	_set_size_slider()
 	_set_speed_slider()
@@ -47,10 +49,10 @@ func _input(event: InputEvent) -> void:
 		_reset()
 
 func _set_speed_slider() -> void:
-	$UI.set_up_speed_slider(MINIMUM_SPEED_MULTIPLIER, MAXIMUM_SPEED_MULTIPLIER, speed_multiplier_step, current_speed_multiplier)
+	ui_node.set_up_speed_slider(MINIMUM_SPEED_MULTIPLIER, MAXIMUM_SPEED_MULTIPLIER, speed_multiplier_step, current_speed_multiplier)
 
 func _set_size_slider() -> void:
-	$UI.set_up_size_slider(MINIMUM_GRID_MULTIPLIER, MAXIMUM_GRID_MULTIPLIER, size_multiplier_step, current_grid_multiplier)
+	ui_node.set_up_size_slider(MINIMUM_GRID_MULTIPLIER, MAXIMUM_GRID_MULTIPLIER, size_multiplier_step, current_grid_multiplier)
 
 
 func _on_ui_toggle_simulation() -> void:
@@ -75,3 +77,11 @@ func _reset() -> void:
 
 func _on_ui_exit() -> void:
 	get_tree().quit(0)
+
+
+func _on_grid_generation_changed(value: int) -> void:
+	ui_node.set_generation(value)
+
+
+func _on_grid_population_changed(value: int) -> void:
+	ui_node.set_population(value)

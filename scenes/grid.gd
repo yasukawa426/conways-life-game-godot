@@ -1,4 +1,6 @@
 extends Control
+signal population_changed(value: int)
+signal generation_changed(value: int)
 
 const _BACKGROUND_COLOR: Color = Color("#20252B")
 const _ALIVE_CELL_COLOR: Color = Color.GREEN
@@ -25,6 +27,15 @@ var _cell_size: Vector2
 ##[/code]
 var _grid: Array[Array] = []
 var _next_grid: Array[Array] = []
+
+var _population: int = 0:
+	set(value):
+		_population = value
+		population_changed.emit(value)
+var _generation: int = 0:
+		set(value):
+			_generation = value
+			generation_changed.emit(value)
 
 const _BASE_SIMULATION_WAIT_TIME: float = 0.1
 var _simulation_wait_time: float = _BASE_SIMULATION_WAIT_TIME
@@ -70,6 +81,14 @@ func _process(_delta: float) -> void:
 
 		# only allow clicking inside the grid
 		if cell.x >= 0 and cell.x < _scaled_size.x and cell.y >= 0 and cell.y < _scaled_size.y:
+			var current = _grid[cell.y][cell.x]
+
+			if current == false and is_left:
+				_population += 1
+			
+			elif current == true and is_left == false:
+				_population -= 1
+
 			_grid[cell.y][cell.x] = is_left # left - alive; right - dead
 			queue_redraw()
 
@@ -166,14 +185,19 @@ func _get_alive_neighbors_count(x: int, y: int) -> int:
 func _apply_rules(is_alive: bool, alive_neighbors_count: int) -> bool:
 	if is_alive:
 		if alive_neighbors_count < 2:
+			_population -= 1
 			return false
 		elif alive_neighbors_count == 2 or alive_neighbors_count == 3:
 			return true
 		else:
+			_population -= 1
 			return false
 	
 	else:
-		return alive_neighbors_count == 3
+		if alive_neighbors_count == 3:
+			_population += 1
+			return true
+		return false
 	
 func toggle_simulation(running: bool):
 	_simulation_running = running
@@ -184,9 +208,15 @@ func toggle_simulation(running: bool):
 func _on_simulation_timer_timeout() -> void:
 	_simulate()
 	queue_redraw()
+
+	_generation += 1
 	simulation_timer.start()
 
 func _reset_arrays() -> void:
+	if _population > 0 or _generation > 0:
+		_population = 0
+		_generation = 0
+		
 	_grid.resize(_scaled_size.y)
 	for y in range(_scaled_size.y):
 		_grid[y] = []

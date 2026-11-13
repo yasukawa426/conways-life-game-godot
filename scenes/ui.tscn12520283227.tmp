@@ -1,0 +1,118 @@
+[gd_scene format=3 uid="uid://ct3weancc8hkn"]
+
+[ext_resource type="Script" uid="uid://qu10ihcyhi6e" path="res://scenes/ui.gd" id="1_nt7q6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nt7q6"]
+content_margin_left = 0.0
+bg_color = Color(0.15487596, 0.154876, 0.15487587, 1)
+border_color = Color(0.14767182, 0.14767182, 0.1476717, 1)
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+shadow_size = 2
+anti_aliasing = false
+anti_aliasing_size = 10.0
+
+[sub_resource type="Theme" id="Theme_nt7q6"]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_nt7q6")
+
+[node name="UI" type="CanvasLayer" unique_id=1380324904]
+script = ExtResource("1_nt7q6")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=17419027]
+offset_left = 13.0
+offset_top = 13.0
+offset_right = 213.0
+offset_bottom = 168.0
+theme = SubResource("Theme_nt7q6")
+
+[node name="FoldableContainer" type="VBoxContainer" parent="PanelContainer" unique_id=233455515]
+layout_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="PanelContainer/FoldableContainer" unique_id=671889576]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="PopulationLabel" type="Label" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=1590603712]
+layout_mode = 2
+text = "Population: 0"
+
+[node name="GenerationLabel" type="Label" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=301390797]
+layout_mode = 2
+text = "Generation: 0"
+
+[node name="BoxContainer" type="BoxContainer" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=912768755]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SizeLabel" type="Label" parent="PanelContainer/FoldableContainer/GridContainer/BoxContainer" unique_id=316227432]
+custom_minimum_size = Vector2(54, 0)
+layout_mode = 2
+text = "Size: "
+
+[node name="SizeHSlider" type="HSlider" parent="PanelContainer/FoldableContainer/GridContainer/BoxContainer" unique_id=436243236]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+min_value = 0.5
+value = 50.5
+ticks_position = 3
+
+[node name="SizeTimer" type="Timer" parent="PanelContainer/FoldableContainer/GridContainer/BoxContainer/SizeHSlider" unique_id=87062642]
+wait_time = 0.05
+one_shot = true
+
+[node name="BoxContainer2" type="BoxContainer" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=420336875]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SpeedLabel" type="Label" parent="PanelContainer/FoldableContainer/GridContainer/BoxContainer2" unique_id=1158022846]
+layout_mode = 2
+text = "Speed:"
+
+[node name="SpeedHSlider" type="HSlider" parent="PanelContainer/FoldableContainer/GridContainer/BoxContainer2" unique_id=1469121893]
+layout_mode = 2
+size_flags_horizontal = 3
+step = 10.0
+
+[node name="SpeedTimer" type="Timer" parent="PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" unique_id=1340194873]
+one_shot = true
+
+[node name="ControlsFoldableContainer" type="FoldableContainer" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=160018656]
+layout_mode = 2
+folded = true
+title = "Controls"
+
+[node name="ControlsLabel" type="Label" parent="PanelContainer/FoldableContainer/GridContainer/ControlsFoldableContainer" unique_id=902435894]
+visible = false
+layout_mode = 2
+text = "Set Cell Alive: Hold LMB
+Set Cell Dead: Hold RMB
+Toggle Simulation: Space Bar 
+Reset Grid: R
+Move Camera: WASD
+Boost Camera: Left Shift
+Zoom In/Out: QE and Scroll Wheel "
+
+[node name="ToggleSimulationButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=2004651856]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "START"
+
+[node name="ResetButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=1578311269]
+layout_mode = 2
+text = "RESET"
+
+[node name="ExitButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=400774979]
+layout_mode = 2
+text = "EXIT"
+
+[connection signal="value_changed" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer/SizeHSlider" to="." method="_on_size_h_slider_value_changed"]
+[connection signal="timeout" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer/SizeHSlider/SizeTimer" to="." method="_on_size_timer_timeout"]
+[connection signal="value_changed" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" to="." method="_on_speed_h_slider_value_changed"]
+[connection signal="timeout" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider/SpeedTimer" to="." method="_on_speed_timer_timeout"]
+[connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ToggleSimulationButton" to="." method="_on_toggle_simulation_button_pressed"]
+[connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ResetButton" to="." method="_on_reset_button_pressed"]
+[connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ExitButton" to="." method="_on_exit_button_pressed"]
