@@ -23,6 +23,9 @@ func _ready() -> void:
 	toggle_simulation_button.text = START_TEXT
 	size_timer.wait_time = DEBOUNCE_TIMER_WAIT_TIME
 	speed_timer.wait_time = DEBOUNCE_TIMER_WAIT_TIME
+	
+	if OS.get_name() == "Web":
+		$PanelContainer/FoldableContainer/GridContainer/ExitButton.hide()
 
 func update_toggle_button(running: bool):
 	toggle_simulation_button.text = STOP_TEXT if running else START_TEXT
