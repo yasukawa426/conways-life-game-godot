@@ -90,3 +90,7 @@ func _on_grid_population_changed(value: int) -> void:
 
 func _on_ui_toggle_borders() -> void:
 	grid_node.toggle_borders()
+
+
+func _on_ui_next_generation() -> void:
+	grid_node.simulate()

@@ -1,6 +1,7 @@
 extends CanvasLayer
 signal size_changed(value: float)
 signal speed_changed(value: float)
+signal next_generation
 signal toggle_simulation
 signal toggle_borders
 signal reset
@@ -75,3 +76,7 @@ func set_population(value: int) -> void:
 
 func _on_toggle_borders_button_pressed() -> void:
 	toggle_borders.emit()
+
+
+func _on_next_button_pressed() -> void:
+	next_generation.emit()

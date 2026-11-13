@@ -138,7 +138,7 @@ func _draw() -> void:
 # Any live cell with more than three live neighbors dies.
 # Any dead cell with exactly three live neighbors becomes alive in the next generation.
 # what is a neigbouhr?: given (x,y) everyone from (x-1, y-1) to (x+1, y+1) minus (x,y) - see neighbours.png
-func _simulate() -> void:
+func simulate() -> void:
 	var x = 0
 	var y = 0
 	for row in _grid:
@@ -155,7 +155,7 @@ func _simulate() -> void:
 	_grid = _next_grid
 	_next_grid = temp
 
-	queue_redraw()
+	_generation += 1
 
 # what is a neigbouhr?: given (x,y) everyone from (x-1, y-1) to (x+1, y+1) minus (x,y) - see neighbours.png
 func _get_alive_neighbors_count(x: int, y: int) -> int:
@@ -209,10 +209,8 @@ func toggle_simulation(running: bool):
 	
 
 func _on_simulation_timer_timeout() -> void:
-	_simulate()
+	simulate()
 	queue_redraw()
-
-	_generation += 1
 	simulation_timer.start()
 
 func _reset_arrays() -> void:

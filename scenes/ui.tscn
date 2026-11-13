@@ -96,6 +96,10 @@ Move Camera: WASD
 Boost Camera: Left Shift
 Zoom In/Out: QE and Scroll Wheel "
 
+[node name="NextButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=908386594]
+layout_mode = 2
+text = "NEXT GENERATION"
+
 [node name="ToggleSimulationButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=2004651856]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
@@ -117,6 +121,7 @@ text = "EXIT"
 [connection signal="timeout" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer/SizeHSlider/SizeTimer" to="." method="_on_size_timer_timeout"]
 [connection signal="value_changed" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider" to="." method="_on_speed_h_slider_value_changed"]
 [connection signal="timeout" from="PanelContainer/FoldableContainer/GridContainer/BoxContainer2/SpeedHSlider/SpeedTimer" to="." method="_on_speed_timer_timeout"]
+[connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/NextButton" to="." method="_on_next_button_pressed"]
 [connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ToggleSimulationButton" to="." method="_on_toggle_simulation_button_pressed"]
 [connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ToggleBordersButton" to="." method="_on_toggle_borders_button_pressed"]
 [connection signal="pressed" from="PanelContainer/FoldableContainer/GridContainer/ResetButton" to="." method="_on_reset_button_pressed"]
