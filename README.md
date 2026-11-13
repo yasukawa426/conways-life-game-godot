@@ -3,13 +3,9 @@
 
 ## Game 5 of 20 - Conway's Game of Life
 
-Game's explanation + purpose of developing it
-
+Its [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) implemented in Godot. 
 ### Gameplay Video
 [![Game Screenshot](http://img.youtube.com/vi/VIDEO CODE HERE/0.jpg)](https://youtu.be/VIDEO CODE HERE)
-
-### Mechanics
-You can move and shoot and stuff and die.
 
 ### Controls
 - Set Cell Alive: Hold LMB
