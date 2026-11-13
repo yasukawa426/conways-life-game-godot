@@ -88,14 +88,14 @@ Move Camera: WASD
 Boost Camera: Left Shift
 Zoom In/Out: QE and Scroll Wheel "
 
-[node name="ResetButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=1578311269]
-layout_mode = 2
-text = "RESET"
-
 [node name="ToggleSimulationButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=2004651856]
 custom_minimum_size = Vector2(80, 0)
 layout_mode = 2
 text = "START"
+
+[node name="ResetButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=1578311269]
+layout_mode = 2
+text = "RESET"
 
 [node name="ExitButton" type="Button" parent="PanelContainer/FoldableContainer/GridContainer" unique_id=400774979]
 layout_mode = 2
