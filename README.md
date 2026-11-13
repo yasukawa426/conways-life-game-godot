@@ -4,6 +4,9 @@
 ## Game 5 of 20 - Conway's Game of Life
 
 Its [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) implemented in Godot. Made in 2 days.
+
+
+Play it: https://yasukawa426.itch.io/conways-game-of-life-in-godot
 ### Gameplay Video
 [![Game Screenshot](http://img.youtube.com/vi/PShm-TCEQ-4/0.jpg)](https://youtu.be/PShm-TCEQ-4)
 
